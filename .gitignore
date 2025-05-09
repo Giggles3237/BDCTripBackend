@@ -1,0 +1,39 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+
+# Logs
+logs
+*.log
+logs/**/*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: VSCode settings
+.vscode/
+
+# Optional: Mac system files
+.AppleDouble
+.LSOverride
+
+# Optional: Windows system files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Optional: Linux system files
+*~
+
+# Optional: Ignore build/dist folders if you use a build process
+dist/
+build/
+
+# Added from the code block
+voting-backend/node_modules/
+voting-backend/.env
