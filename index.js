@@ -45,5 +45,25 @@ app.get('/votes/raw', async (req, res) => {
   res.json(rows);
 });
 
+// Remove a vote for a participant, attraction, and category
+app.delete('/vote', async (req, res) => {
+  const { participant, attractionId, category } = req.body;
+  if (!participant || !attractionId || !category) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+  // Delete only one matching vote (the most recent)
+  const [result] = await db.query(
+    'DELETE FROM votes WHERE participant = ? AND attraction_id = ? AND category = ? ORDER BY id DESC LIMIT 1',
+    [participant, attractionId, category]
+  );
+  res.json({ success: true, affectedRows: result.affectedRows });
+});
+
+// Delete all votes (admin/testing endpoint)
+app.delete('/votes/all', async (req, res) => {
+  await db.query('DELETE FROM votes');
+  res.json({ success: true });
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));
