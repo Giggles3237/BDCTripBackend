@@ -39,5 +39,11 @@ app.get('/votes', async (req, res) => {
   res.json(rows);
 });
 
+// Get all raw votes (for frontend integration)
+app.get('/votes/raw', async (req, res) => {
+  const [rows] = await db.query('SELECT participant, attraction_id, category FROM votes');
+  res.json(rows);
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`API running on port ${PORT}`));
